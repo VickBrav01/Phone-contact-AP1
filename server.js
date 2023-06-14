@@ -1,21 +1,20 @@
 import express from "express";
 
-import { config } from "./src/db/config.js";
+import config from "./src/db/config.js";
 
-import user from "./src/routes/phoneRoutes.js";
+import bodyParser from "body-parser";
+import user from "./src/routes/routes.js";
+
 
 const app = express();
 
-user(app);
-
-// middlewares
+//middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+user(app);
 
 app.listen(config.port, () => {
-  console.log(` Server is running on port ${config.port}`);
+  console.log(`Server running at ${config.url}`);
 });
