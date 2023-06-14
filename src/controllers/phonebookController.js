@@ -2,10 +2,23 @@ import sql from "mssql";
 import { config } from "../db/config.js";
 
 export const allUsers = async (req, res) => {
-  res.send("all users");
+  try {
+    let pool = await sql.connect(config.sql);
+    let result = await pool
+      .request()
+      .query("SELECT FirstName, LastName FROM Contacts");
+    res.json(result.recordset);
+  } catch (error) {
+    res.status(201).json(error.message);
+  } finally {
+    sql.close();
+  }
 };
 export const createUser = async (req, res) => {
-  res.send("create user");
+  try {
+  } catch (error) {
+  } finally {
+  }
 };
 export const getSingleUser = async (req, res) => {
   res.send("get single user");
@@ -16,5 +29,3 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
   res.send("delete user");
 };
-
-
