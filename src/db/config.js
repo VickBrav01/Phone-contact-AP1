@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 
 import assert from "assert";
-  
 
 dotenv.config();
 
@@ -10,7 +9,6 @@ const {
   HOST,
   PORT,
   SQL_SERVER,
-  SQL_PORT,
   SQL_USER,
   SQL_PWD,
   SQL_DB,
@@ -18,13 +16,12 @@ const {
 
 const sqlEncrypt = process.env.SQL_ENCRYPT === "true";
 
-assert(HOST, "HOST_URL is required");
-assert(PORT, "HOST is required");
+assert(PORT, "HOST_URL is required");
+assert(HOST, "HOST is required");
 
- export const config = {
+const config = {
   port: PORT,
   host: HOST,
-
   url: HOST_URL,
   sql: {
     server: SQL_SERVER,
@@ -33,9 +30,9 @@ assert(PORT, "HOST is required");
     database: SQL_DB,
     options: {
       encrypt: sqlEncrypt,
-      enableArithAbort: true,
+      enableArithAbort: true
     },
   },
 };
 
-
+export default config;
